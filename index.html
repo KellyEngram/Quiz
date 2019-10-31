@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>What Kind Of Plant Are You?</title>
+</head>
+<style>
+
+body {
+background-color: lawngreen;
+font-family: Helvetica;
+}
+
+#main {
+width: 90%;
+max-width: 950px;
+margin: auto;
+padding: 10px;
+background-color: white;
+}
+
+#header {
+margin-top: 0;
+padding: 5px;
+height: 350px;
+color: white;
+background-image: url("garden.jpg");
+}
+
+#columns {
+margin: auto;
+clear: both;
+overflow: auto;
+}
+
+#col1 {
+width: 45%;
+margin: 10px;
+float: left;
+}
+
+#col2 {
+width: 45%;
+margin: 10px;
+float: right;
+}
+
+fieldset {
+border: none;
+}
+
+label {
+display: block;
+}
+
+input {
+width: 30px;
+margin-left: 20px;
+}
+
+h2 {
+clear: both;
+padding-top: 20px;
+}
+</style>
+
+
+<body>
+<div id="main"><!-- open main div -->
+<div id="header"><h1 style=font-size:80px>What Kind<br> Of Plant<br> Are You?</h1><!-- open header div -->
+</div><!-- close header div -->
+
+<form id="form1">
+<div id="columns">
+<div id="col1">
+<h2>Which color t-shirt will you put on with khaki pants?</h2>
+<label><input type="radio" name="color" value="plumbago" />Blue</label>
+<label><input type="radio" name="color" value="agave" />Yellow</label>
+<label><input type="radio" name="color" value="hibiscus" />Pink</label>
+
+<h2>What do you want to do on a Saturday afternoon?</h2>
+<label><input type="radio" name="sunlight" value="plumbago" />Read a book</label>
+<label><input type="radio" name="sunlight" value="agave" />Play volleyball</label>
+<label><input type="radio" name="sunlight" value="hibiscus" />Clean the house</label>
+
+<h2>What would be your dream vacation destination?</h2>
+<label><input type="radio" name="climate" value="plumbago" />Costa Rica</label>
+<label><input type="radio" name="climate" value="agave" />Australia</label>
+<label><input type="radio" name="climate" value="hibiscus" />The Caribbean</label>
+</fieldset>
+</div> 
+
+<div id="col2">
+<fieldset>
+<h2>What is your personality type?</h2>
+<label><input type="radio" name="growth" value="plumbago" />Dependable</label>
+<label><input type="radio" name="growth" value="agave" />Authoritative</label>
+<label><input type="radio" name="growth" value="hibiscus" />Unpredictable</label>
+
+<h2>What side do you want with your meatloaf?</h2>
+<label><input type="radio" name="soil" value="plumbago" />Mashed Potatoes</label>
+<label><input type="radio" name="soil" value="agave" />Mac & Cheese</label>
+<label><input type="radio" name="soil" value="hibiscus" />Rice</label>
+
+<h2>What kind of music do you like? </h2>
+<label><input type="radio" name="music" value="plumbago" />Country</label>
+<label><input type="radio" name="music" value="agave" />Rock</label>
+<label><input type="radio" name="music" value="hibiscus" />Pop</label>
+</fieldset>
+</div> 
+</div> 
+<br><br>
+<button type="submit" value="Submit">Submit</button>
+
+<button type="reset" value="Reset">Try Again!</button>
+
+</form>
+
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p>
+<p id="answer4"></p>
+
+</div> 
+
+
+<script>
+ 
+    
+	document.getElementById("form1").onsubmit=function() {
+	   
+	  color = document.querySelector('input[name = "color"]:checked').value;
+	  sunlight = document.querySelector('input[name = "sunlight"]:checked').value;
+	  climate = document.querySelector('input[name = "climate"]:checked').value;
+	  growth = document.querySelector('input[name = "growth"]:checked').value;
+	  soil = document.querySelector('input[name = "soil"]:checked').value;
+	  music = document.querySelector('input[name = "music"]:checked').value;
+	  
+	    
+	  // initialize score variables 
+	 plumbago = 0;
+	 agave = 0;
+	 hibiscus = 0;
+	  
+	  
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "plumbago") { plumbago = plumbago + 1}
+	  if(x == "agave") { agave = agave + 1}
+	  if(x == "hibiscus") { hibiscus = hibiscus + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+	  
+	  //call function for each question
+	  eachscore(eval("color"));
+	  eachscore(eval("sunlight"));
+	  eachscore(eval("climate"));
+	  eachscore(eval("growth"));
+	  eachscore(eval("soil"));
+	  eachscore(eval("music"));
+	  
+	  
+	  all = [plumbago, agave, hibiscus];
+	  
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+	
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+	
+
+// object holding scores and feedback	
+scores = [{index:0, feedback: "<center><img src='plumbago.png' alt='plumbago'/>"},
+{index:1, feedback: "<center><img src='agave.png' alt='agave'/>"},
+{index:2, feedback: "<center><img src='hibiscus.png' alt='hibiscus' />"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+document.getElementById("answer4").innerHTML = scores[i].feedback;
+}
+}
+   
+		   
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+	
+
+</script>
+
+
+
+</div><!-- close main div -->
+</body>
+</html>
+
+
+
